@@ -1,29 +1,26 @@
 import json
 
-def getKeys(req):
+def getKeys(pars):
     keys = []
-    parsed = json.loads(req.content)
-    for computer in parsed['computers']:
+    for computer in pars['computers']:
         for key in computer.keys():
-            keys.append(key)
+            keys.append(key.upper())
         break
     keys = ', '.join(map(str, keys))
     return keys
 
-def getVals(req):
-    parsed = json.loads(req.content)
+def getVals(pars):
     list = []
-    for computer in parsed['computers']:
+    for computer in pars['computers']:
         tmp = []
         for value in computer.values():
             tmp.append(value)
         list.append(tmp)
     return list
 
-def getHeaders(req,):
+def getHeaders(pars):
     headers = []
-    parsed = json.loads(req.content)
-    for computer in parsed['computers']:
+    for computer in pars['computers']:
         for key in computer.keys():
             definition = key + ' VARCHAR(255)'
             headers.append(definition)
